@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Sesión 3: Taller Visiones del Futuro (Preparatoria)</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .header {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+         .header h2 {
+            margin: 5px 0 0;
+            font-size: 1.3em;
+            font-weight: normal;
+         }
+        .time-title {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .banner {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .banner:hover {
+            background-color: #1976D2; /* Darker blue on hover */
+        }
+        .banner .title {
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner .subtitle {
+            font-size: 1em;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 8px;
+            font-weight: normal;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+            background-color: #f9f9f9;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .dialogue {
+            background-color: #e3f2fd; /* Light blue background for dialogue */
+            border: 1px solid #bbdefb; /* Lighter blue border */
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left; /* Adjusted alignment */
+            font-style: normal; /* Removed italics for main dialogue */
+            position: relative;
+        }
+        .dialogue::before { /* Optional: Add a small quote icon or similar */
+            /* content: '💬'; */
+            /* position: absolute; */
+            /* left: 10px; */
+            /* top: 10px; */
+            /* font-size: 1.2em; */
+        }
+        .dialogue i { /* Style for instructions within dialogue */
+           display: block;
+           margin-top: 8px;
+           color: #555;
+           font-style: italic;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dropdown select {
+            font-size: 1em;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            text-align: left;
+        }
+         td:first-child {
+            font-weight: bold;
+             width: 40%; /* Adjust width as needed */
+         }
+        ul, ol {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+             color: #1976D2; /* Darker blue for emphasis */
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+    <script>
+        function updateActivities() {
+            var selectedTime = document.getElementById('time-select').value;
+            var activities = document.getElementsByClassName('activity');
+
+            document.getElementById('selected-time').innerText = "Tiempo efectivo de clase: " + selectedTime + " minutos";
+
+            // Since the base time for this session IS 40 minutes, we show all activities for 40min.
+            // No complex hiding logic needed for this specific session.
+            for (var i = 0; i < activities.length; i++) {
+                activities[i].style.display = 'block';
+            }
+        }
+
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        // Ensure activities are shown correctly on initial load based on default dropdown value
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActivities(); // Call once on load
+             // Set default display to none for all content sections
+             var contents = document.querySelectorAll('.content');
+             contents.forEach(function(content) {
+                 content.style.display = 'none';
+             });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Playbook - Taller: Visiones del Futuro: Diseñando con IA Generativa (1º de Preparatoria)</h1>
+    <h2>Sesión 3: Conexión Humana y Detalle - Del Mash-Up al T-Bar con IA</h2>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="time-select">Tiempo efectivo de Clase:</label>
+        <select id="time-select" onchange="updateActivities()">
+            <option value="40" selected>40 minutos</option>
+            <!-- No other time options needed as per the PDF for this session -->
+        </select>
+    </div>
+
+    <h2 id="selected-time" class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+<!-- ------------------------------------------------- Espacio para De un Vistazo --------------------------------------------------------- -->
+<div id="activity-0" class="activity">
+    <div class="banner" onclick="toggleContent('de_un_vistazo')">
+        <div class="title">🎯 De un Vistazo y Preparación Previa 📋</div>
+        <div class="subtitle">Resumen rápido de la sesión y lo que necesitas preparar.</div>
+    </div>
+    <div id="de_un_vistazo" class="content">
+        <table>
+            <tr>
+                <td>
+                    <strong>Objetivos:</strong>
+                    <ul>
+                        <li>Recordar las ideas Mash-Up generadas, con enfoque en IA/Automatización.</li>
+                        <li>Seleccionar UNA idea Mash-Up prometedora por equipo para desarrollar.</li>
+                        <li>Táctica 3 (Human Truths): Analizar cómo la idea Mash-Up seleccionada conecta con necesidades humanas fundamentales.</li>
+                        <li>Táctica 4 (T-Bar): Describir detalladamente la idea Mash-Up seleccionada, integrando su función, el rol de la IA/Auto y la conexión con Human Truths.</li>
+                    </ul>
+                    <strong>Tácticas Principales:</strong> Human Truths, T-Bar.<br><br>
+                    <strong>Entregable Clave:</strong> T-Bar completo por equipo para su idea Mash-Up principal, detallando el rol de la IA y la conexión humana.
+                </td>
+                <td>
+                    <strong>Materiales Específicos:</strong>
+                    <ul>
+                        <li>Proyector/Pantalla, Computadora, Internet.</li>
+                        <li>Acceso a tablero Miro (o similar) con las ideas Mash-Up de la Sesión 2 visibles y plantillas T-Bar.</li>
+                        <li>Presentación de diapositivas (Láminas 13-17 detalladas abajo).</li>
+                        <li>Lista/Lámina de Human Truths (con ejemplos IA).</li>
+                        <li>Ejemplo "Eco-Conserje IA" / "MentorVivo" para Human Truths y T-Bar (Láminas 15 y 17).</li>
+                    </ul>
+                     <strong>Preparación Previa para ESTA Sesión:</strong>
+                    <ol>
+                        <li><strong>Presentación Lista:</strong> Tener listas las Diapositivas 13 a 17. Preparar los ejemplos claros de Human Truths y T-Bar aplicados a las ideas Mash-Up con IA (usar MentorVivo como ejemplo unificado).</li>
+                        <li><strong>Plantillas T-Bar:</strong> Preparar plantillas T-Bar (digitales en Miro o físicas) listas para cada equipo.</li>
+                        <li><strong>Lista Human Truths:</strong> Tener lista la Diapositiva 14 con la lista de verdades humanas y ejemplos de conexión con IA.</li>
+                        <li><strong>Espacio de Trabajo:</strong> Asegurar que los equipos tengan acceso fácil a sus ideas Mash-Up de la sesión anterior.</li>
+                    </ol>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Espacio para Actividades --------------------------------------------------------- -->
+
+<!-- Actividad 1 -->
+<div id="activity-1" class="activity">
+    <div class="banner" onclick="toggleContent('repaso_conexion_s3')">
+        <div class="title">🔄 Actividad 1: Repaso y Conexión ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Recordar los Mash-Ups, seleccionar uno y conectar con las tácticas de hoy: Human Truths y T-Bar.</div>
+    </div>
+    <div id="repaso_conexion_s3" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Repaso Sesión 2 y Mash-Ups. Proyectar Diapositiva 13 (Título y Texto).</td>
+                <td class="dialogue">
+                    "¡Creadores del futuro, de vuelta! La sesión pasada fue una locura creativa con el <strong>Mash-Up</strong>, ¡mezclaron ideas y surgieron conceptos futuristas increíbles con IA! Exploraron, preguntaron y fusionaron elementos inesperados."
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Conectar con Tácticas 3 y 4.</td>
+                <td class="dialogue">
+                     "Hoy vamos a hacer dos cosas súper importantes para darle vida a esas ideas: Primero, vamos a conectar esas ideas tecnológicas con lo que realmente nos importa como humanos, usando la Táctica 3: <strong>'Human Truths'</strong>. Le daremos 'alma' humana a nuestros Mash-Ups. Y segundo, con la Táctica 4: el <strong>T-Bar</strong>, ¡vamos a describir nuestra MEJOR idea Mash-Up a fondo, detallando cómo funciona, el rol de la IA y por qué es relevante para las personas!"
+                     <br><br>
+                     "Pasamos del Nivel 1 y 2 (Exploración y Fusión) al Nivel 3 y 4 (Conexión Humana y Detalle). ¡Es hora de profundizar!"
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (2 minutos):</strong> Selección de Idea Mash-Up.</td>
+                <td class="dialogue">
+                     "Antes de empezar, revisen rápidamente las ideas Mash-Up que generaron en la sesión anterior. Como equipo, elijan <strong>UNA</strong>, la que más les guste, la más prometedora, la que quieran desarrollar hoy. Esta será la idea que trabajaremos a fondo con Human Truths y el T-Bar."
+                     <br><br>
+                    <i>(Dar 1-2 minutos para que los equipos revisen sus notas/Miro y seleccionen su idea Mash-Up principal. Pedir que levanten la mano cuando hayan decidido).</i>
+                    "¿Listos? ¡Excelente! Ya tienen su idea estrella. ¡Vamos a darle corazón!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 2 -->
+<div id="activity-2" class="activity">
+    <div class="banner" onclick="toggleContent('human_truths')">
+        <div class="title">❤️ Actividad 2: Táctica 3: Human Truths (Aplicada a Ideas con IA) ⏰ Tiempo: 10 minutos</div>
+        <div class="subtitle">Analizar cómo la idea Mash-Up seleccionada conecta con necesidades humanas fundamentales.</div>
+    </div>
+    <div id="human_truths" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (2 minutos):</strong> Introducir Human Truths. Proyectar Diapositiva 14 (Instrucciones y Lista).</td>
+                <td class="dialogue">
+                    "¡Ok, ya tienen su idea Mash-Up estrella! Ahora, vamos a aplicar la Táctica 3: <strong>Human Truths</strong>. Pensemos: más allá de la tecnología cool, ¿por qué le importaría a alguien su idea? ¿Qué necesidad humana profunda toca? ¿Qué la hace significativa?"
+                    <br><br>
+                    "Vamos a usar esta lista de 'Verdades Humanas', motivaciones universales que todos compartimos. Miren su idea Mash-Up (que incluye IA/Auto) y pregúntense: ¿Con cuál de estas verdades conecta MÁS? ¿Ayuda a la gente a sentirse <strong>segura</strong>? ¿A <strong>pertenecer</strong>? ¿A <strong>expresarse</strong>? ¿A <strong>progresar</strong>? ¿A <strong>divertirse</strong>?"
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Explicar la Lista de Human Truths.</td>
+                 <td class="dialogue">
+                     "Repasemos algunas de estas verdades:"
+                     <ul>
+                         <li><strong>Nos distraemos fácil:</strong> ¿Cómo capta y mantiene la atención tu idea?</li>
+                         <li><strong>No nos gusta que nos digan qué hacer:</strong> ¿Da autonomía tu idea?</li>
+                         <li><strong>Nos gusta lo bonito:</strong> ¿Es estéticamente agradable o funcionalmente elegante?</li>
+                         <li><strong>Queremos pertenecer:</strong> ¿Crea comunidad o conexión?</li>
+                         <li><strong>Queremos que nos reconozcan:</strong> ¿Valida o celebra al usuario?</li>
+                         <li><strong>Queremos sentirnos seguros:</strong> ¿Ofrece seguridad física, emocional o digital? (¡Muy relevante con IA!)</li>
+                         <li><strong>Queremos avanzar/progresar:</strong> ¿Ayuda a aprender, crecer o mejorar?</li>
+                         <li><strong>Nos encanta expresarnos:</strong> ¿Permite mostrar identidad o creatividad?</li>
+                         <li><strong>Nos gusta jugar:</strong> ¿Tiene elementos lúdicos o divertidos?</li>
+                         <li><strong>Somos contradictorios:</strong> ¿Abraza alguna complejidad humana?</li>
+                     </ul>
+                     "Piensen en cómo la IA en su idea potencia o se relaciona con estas verdades."
+                 </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (5 minutos):</strong> Discusión y Selección en Equipo.</td>
+                <td class="dialogue">
+                    "Discutan en equipo: ¿Cuál es la conexión humana MÁS fuerte de su idea Mash-Up, considerando su componente de IA? ¿Por qué su visión del futuro es significativa para las personas a un nivel profundo? Elijan <strong>1 o 2 Human Truths</strong> clave y anoten en su tablero Miro (o donde estén trabajando) <strong>por qué</strong> conectan con su idea. Sean específicos."
+                    <br><br>
+                    <i>(Facilitar la discusión. Ayudarles a ir más allá de la función tecnológica y pensar en el beneficio/necesidad humana subyacente. Preguntar: "¿Cómo la IA ayuda a [Human Truth elegida]?". Ejemplo: "Nuestra idea [Nombre Mash-Up] conecta con 'queremos sentirnos seguros' porque la IA [hace X cosa específica] para proteger la privacidad del usuario.")</i>
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Cierre y Ejemplo. Proyectar Diapositiva 15 (Ejemplo MentorVivo).</td>
+                 <td class="dialogue">
+                    "¡Tiempo! Ya identificaron el corazón humano de su idea. Miren este ejemplo rápido con 'MentorVivo':"
+                    <br>
+                    *   **Idea:** MentorVivo (IA que educa y cuida).
+                    *   **Human Truths Conectadas:**
+                        *   **1. Todos queremos avanzar, crecer, mejorar:** MentorVivo te ayuda a convertirte en tu mejor versión, no solo académicamente, sino emocionalmente. Te ve, te escucha, te anima.
+                        *   **2. La neta, a nadie le late sentirse en peligro:** MentorVivo crea un entorno seguro para aprender, sin juicios, adaptándose a tu ritmo y estado emocional. Reduce la ansiedad y el miedo al fracaso. (Seguridad emocional = Aprendizaje real).
+                        *   **(Opcional) + Nos gusta jugar:** Podría usar dinámicas de juego ("Haz 3 sentadillas y resuelve 3 ecuaciones"). ¡La educación no tiene que ser aburrida!
+                    <br>
+                    "Vieron que no solo era tecnología, sino que ayudaba a la gente a <strong>progresar</strong> y a sentirse <strong>segura/cuidada</strong>. ¡Esa es la conexión humana! Ahora encuentren la de su idea."
+                     <br><br>
+                    <i>(Entregable Parcial: 1-2 Human Truths clave identificadas y justificadas brevemente por equipo para su idea Mash-Up).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 3 -->
+<div id="activity-3" class="activity">
+    <div class="banner" onclick="toggleContent('t_bar')">
+        <div class="title">📊 Actividad 3: Táctica 4: T-Bar (Detallando la Idea con IA y Human Truth) ⏰ Tiempo: 20 minutos</div>
+        <div class="subtitle">Describir detalladamente la idea Mash-Up seleccionada utilizando la plantilla T-Bar.</div>
+    </div>
+    <div id="t_bar" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (2 minutos):</strong> Introducir el T-Bar. Proyectar Diapositiva 16 (Instrucciones).</td>
+                <td class="dialogue">
+                     "¡Ahora, a plasmar toda esa genialidad en el <strong>T-Bar</strong>! Esta es nuestra herramienta para crear el perfil completo de su visión del futuro. Es como la ficha técnica y el alma de su idea, todo en uno."
+                     <br><br>
+                     "Tomen su plantilla T-Bar (en Miro o en papel). Vamos a llenar ambos lados:"
+                     <ul>
+                         <li><strong>Lado Izquierdo: ¡El Dibujo/Boceto!</strong> Hagan un boceto rápido que muestre su idea Mash-Up en acción. ¡Asegúrense de que se vea claramente cómo funciona la <strong>IA o la automatización</strong>! No tiene que ser una obra de arte, pero sí comunicar visualmente la esencia.</li>
+                         <li><strong>Lado Derecho: ¡La Descripción Detallada!</strong> Aquí vamos a escribir los puntos clave:</li>
+                     </ul>
+                 </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (3 minutos):</strong> Explicar los Componentes del Lado Derecho del T-Bar.</td>
+                 <td class="dialogue">
+                    "En el lado derecho, describan:"
+                    <ol>
+                        <li><strong>Título Cool:</strong> Un nombre futurista y atractivo para su idea.</li>
+                        <li><strong>Qué es (La Visión):</strong> Una frase impactante que resuma su visión. ¿Cuál es la gran idea?</li>
+                        <li><strong>Para qué ODS/Problema:</strong> ¿Qué ODS específico y qué problema concreto resuelve?</li>
+                        <li><strong>Cómo funciona (IA/Auto):</strong> Expliquen brevemente CÓMO usaría la IA Generativa o la automatización. ¿Qué crea la IA? ¿Qué tarea automatiza? ¿Cuál es el rol específico de la tecnología?</li>
+                        <li><strong>A quién ayuda:</strong> ¿Quiénes son los beneficiarios principales? ¿Para quién es esta visión?</li>
+                        <li><strong>¡El Corazón! (Human Truth):</strong> ¿Qué necesidad humana clave (la que eligieron antes) satisface? ¿Por qué es importante para las personas? ¡Conecten aquí su Human Truth!</li>
+                    </ol>
+                     "¡Sean claros, específicos y conecten todo! Usen la Human Truth para darle fuerza a su 'por qué'."
+                 </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (13 minutos):</strong> Tiempo de trabajo en equipo para completar el T-Bar.</td>
+                <td class="dialogue">
+                    "Tienen unos 18 minutos para completar su T-Bar. Dibujen el concepto a la izquierda y detallen la descripción a la derecha. ¡Este es el momento central de la sesión! Asegúrense de que el rol de la IA/Auto quede muy claro y que la conexión con la Human Truth sea convincente."
+                    <br><br>
+                    <i>(Momento central de la sesión. Circular mucho, ayudar a detallar el rol de la IA/Auto, asegurar que articulen bien la conexión con la Human Truth. Revisar bocetos y descripciones, hacer preguntas para profundizar. Es crucial que ambos lados del T-Bar estén completos y conectados).</i>
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (2 minutos):</strong> Mostrar Ejemplo Completo. Proyectar Diapositiva 17 (Ejemplo T-Bar MentorVivo).</td>
+                 <td class="dialogue">
+                    "Vean el ejemplo completo del T-Bar de 'MentorVivo'. Observen cómo el dibujo (Lado Izquierdo) muestra al estudiante interactuando con la IA en la laptop, con elementos visuales como el avatar, diálogos de ejemplo y barras de progreso emocional/académico. Y cómo la descripción (Lado Derecho) detalla cada punto: el título, la visión, los ODS (4 y 3), el funcionamiento específico de la IA (prompting avanzado, detección de emociones, adaptación, automatización de feedback) y cómo conecta con la Human Truth de 'queremos avanzar, crecer y mejorar'. ¡Así de completo debe quedar su T-Bar!"
+                     <br><br>
+                    <i>(Asegurarse de que la Diapositiva 17 muestre claramente ambos lados del T-Bar para MentorVivo, tal como se describe en el PDF).</i>
+                    <br><br>
+                    <i>(Entregable Clave: T-Bar completo por equipo para su idea Mash-Up principal (digital o físico)).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 4 -->
+<div id="activity-4" class="activity">
+    <div class="banner" onclick="toggleContent('cierre_s3')">
+        <div class="title">🏁 Actividad 4: Cierre y Preparación para la Próxima Sesión ⏰ Tiempo: 2 minutos</div>
+        <div class="subtitle">Resumir los logros de la sesión y anticipar la presentación final.</div>
+    </div>
+    <div id="cierre_s3" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Resumen y Próxima Sesión.</td>
+                 <td class="dialogue">
+                     "¡Impresionante trabajo, diseñadores del futuro! Han conectado sus ideas Mash-Up con el corazón humano a través de las Human Truths y las han detallado magistralmente en sus T-Bars. ¡Sus visiones están tomando una forma muy sólida y significativa!"
+                     <br><br>
+                    "Guarden bien estos T-Bars, son la base para la última sesión. En la sesión final, contaremos la historia del <strong>impacto épico</strong> de estas ideas usando 'Big Beats', pensaremos cómo hacer un <strong>prototipo conceptual</strong> usando IA, y ¡celebraremos el <strong>lanzamiento</strong> de nuestras visiones!"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (0.5 minutos):</strong> Despedida.</td>
+                <td class="dialogue">
+                    "¡Falta poco para completar la receta! Han hecho un trabajo increíble conectando tecnología y humanidad. ¡Nos vemos en la Sesión 4 para darle el gran final a nuestras Visiones del Futuro! ¡Hasta entonces!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Fin Espacio para Actividades --------------------------------------------------------- -->
+
+</div>
+
+</body>
+</html>
